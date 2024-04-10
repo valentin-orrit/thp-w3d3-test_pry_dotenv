@@ -9,7 +9,6 @@ api_key = ENV["OPENAI_API_KEY"]
 
 
 conversation_history = []
-# binding.pry
 
 def converse_with_ai(api_key, conversation_history)
   url = "https://api.openai.com/v1/completions"
@@ -22,14 +21,13 @@ def converse_with_ai(api_key, conversation_history)
   loop do
     prompt = gets.chomp
     
-    #puts prompt
     break if prompt == "stfu"
     
     conversation_history << prompt
     data = {
       "prompt" => conversation_history,
-      "max_tokens" => 100,
-      "temperature" => 0.5,
+      "max_tokens" => 150,
+      "temperature" => 0,
       "model" => "gpt-3.5-turbo-instruct"
     }
     
@@ -38,7 +36,7 @@ def converse_with_ai(api_key, conversation_history)
     response_string = response_body['choices'][0]['text'].strip
     
     conversation_history << response_string
-    puts response_string
+    puts "bot: " + response_string
   end
 end
 
