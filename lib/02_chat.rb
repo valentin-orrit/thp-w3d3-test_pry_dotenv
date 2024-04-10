@@ -7,7 +7,6 @@ Dotenv.load
 
 api_key = ENV["OPENAI_API_KEY"]
 
-
 conversation_history = []
 
 def converse_with_ai(api_key, conversation_history)
@@ -25,7 +24,7 @@ def converse_with_ai(api_key, conversation_history)
     
     conversation_history << prompt
     data = {
-      "prompt" => conversation_history,
+      "prompt" => conversation_history.join("\n"),
       "max_tokens" => 150,
       "temperature" => 0,
       "model" => "gpt-3.5-turbo-instruct"
